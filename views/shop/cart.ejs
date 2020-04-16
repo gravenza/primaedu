@@ -1,0 +1,91 @@
+<%- include('../include/header') %>
+
+<div class="main" role="main">
+
+  <section class="page-header page-header-modern page-header-background page-header-background-sm parallax custom-page-header mt-0" data-plugin-parallax data-plugin-options="{'speed': 1.5}" data-image-src="/images/parallax-4.jpg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 order-2 order-md-1 align-self-center p-static">
+					<h1 class="font-weight-bold">Creative Writing</h1>
+					<span class="text-color-light d-block position-relative font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</span>
+
+				</div>
+				<div class="col-md-4 order-1 order-md-2 align-self-center">
+					<ul class="breadcrumb d-block text-md-right">
+						<li><a href="demo-education.html">Home</a></li>
+									<li class="active text-color-light">Courses</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</section>
+
+  <section class="section section-product bg-white m-0 p-0 border-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <% console.log(products); %>
+          <% if (products.length > 0) { %>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Product</th>
+                      <th>Title</th>
+                      <th>qty</th>
+                      <th>Price</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    <% var total = 0; %>
+
+                    <% products.forEach(p => {
+
+                      total = total + +p.productData.price;
+
+                      var num = Number(p.productData.price);
+                      var num_format = num.toLocaleString('en-ID');
+
+                    %>
+                      <tr>
+                        <td width="20%"><img class="img-fluid" src="/images/<%= p.productData.image %>" alt=""> </td>
+                        <td><strong><%= p.productData.title %></strong></td>
+                        <td><%= p.qty %></td>
+                        <td><%= num_format %></td>
+                        <td>
+                          <form action="/cart-delete-item" method="POST">
+                            <input type="hidden" value="<%= p.productData.id %>" name="productId">
+                            <button class="btn" type="submit">Delete</button>
+                          </form>
+                        </td>
+                      </tr>
+                    <% }) %>
+
+                    <%
+                    const totalNum = Number(total);
+                    const totalFormat = totalNum.toLocaleString('en-ID');
+                    %>
+
+                    <tr>
+                      <td colspan="4" align="right">Total</td>
+                      <td><%= totalFormat %></td>
+                    </tr>
+
+
+
+                  </tbody>
+
+                </table>
+
+
+            <% } else { %>
+                <h1>No Products in Cart!</h1>
+            <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<%- include('../include/footer') %>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+head
+  meta(charset='utf-8')
+  title #{pageTitle}
+  link(rel='stylesheet', href='/css/bootstrap.css')
+body  
+  
+  include ../include/nav.pug
+        
+  main.mt-4
+    .container
+      .row
+        .col-12
+          form(action='/admin/add-product', method='POST')
+            .form-row
+              .form-group.col-lg-6
+                label Title
+                input.form-control(type='text', name='title')
+              .form-group.col-lg-6
+                label Image Url
+                input.form-control(type='text', name='imageUrl')
+              .form-group.col-lg-12
+                label Description
+                textarea.form-control(name='description', rows="6")
+              .form-group.col-lg-12
+                label Price
+                input.form-control(type='text', name='price')   
+              .form-group
+                button.btn.btn-primary(type='submit', name='button') Add Product 

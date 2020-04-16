@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+html(lang)
+  head
+    meta(charset='utf-8')
+    title #{doctTitle}
+    link(rel='stylesheet', href='/css/bootstrap.css')
+  body
+  
+    include ../include/nav.pug
+    
+    main 
+      .container
+        .row
+          .col-lg-12.mt-4
+            h1 #{product.title}
+            img.mb-4.img-fluid(src="../images/games-2.png", alt="games")
+            h2 Rp. #{product.price},-
+            p #{product.description}
+            form(action="/cart" method="POST")
+              .form-group
+                input(type="hidden" name="productId" value=product.id)
+                button.btn.btn-primary(type="submit" name="submit") Add to Cart
+              
+            
+    
+    

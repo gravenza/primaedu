@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+html(lang="en")
+  head 
+    meta(charset='utf-8')
+    title #{doctTitle}
+    link(rel='stylesheet', href='/css/bootstrap.css')
+  body      
+    include ../include/nav.pug 
+    main.mt-4
+      .container
+        if prods.length > 0
+          h1.mb-4 My Product
+          .row
+            each product in prods
+              .col-lg-4.mb-4 
+                .card
+                  img.img-fluid(src="images/games-2.png", alt="games")
+                  .card-body.p-4
+                    h4
+                      a(href="#") #{product.title}
+                    p #{product.description}
+                    p
+                      strong Rp. #{product.price}  
+                    .btn-action.row 
+                      .col-lg-6
+                        a.btn.btn-success.btn-block.mr-3(href="/products/"+ product.id) Detail
+                      .col-lg-6
+                        form(action="/cart" method="POST")
+                          .form-group
+                            input(type="hidden" name="productId" value=product.id)
+                            button.btn.btn-primary.btn-block(type="submit" name="submit") Add to Cart   
+        else
+          h1 Product Not Found
